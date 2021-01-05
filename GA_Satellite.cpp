@@ -1,7 +1,7 @@
 
 #include "GA_Func.h"
 // Number of individuals in each generation 
-#define POPULATION_SIZE 100 //Make this even, I divide by an even number below and it throws out the 
+#define POPULATION_SIZE 100 
 int MaxGenerations = 100;
 const int len = 3;
 std::array<double,len>  GENES = {10,10,10};
@@ -34,6 +34,7 @@ Individual mate(Individual par1, Individual par2)
     Individual child_chromosome; 
     double mean;
     double std;
+    int len = par1.chromosome.size();
     for(int i = 0;i<len;i++) 
     { 
         // random probability  
@@ -128,17 +129,60 @@ void WorkerPool() {
 
 
 int main(int argc, char* argv[]) { 
+        // std::string line;
+        // std::cout << argv[1];
+
+        // std::ifstream myfile (argv[1]);
+        // if (myfile.is_open())
+        // {
+        //     while ( getline (myfile,line) )
+        //     {
+        //     std::cout << line << '\n';
+        //     }
+        //     myfile.close();
+        // }
+
+        // else std::cout << "Unable to open file";
+    ScenarioParameters Scenario;
+    Scenario.GroundTargets_X.push_back(13.122088); Scenario.GroundTargets_Y.push_back(111.428571);
+    Scenario.GroundTargets_X.push_back(16.067662); Scenario.GroundTargets_Y.push_back(111.428571);
+    Scenario.GroundTargets_X.push_back(10.176514); Scenario.GroundTargets_Y.push_back(114.857143);
+    Scenario.GroundTargets_X.push_back(10.176514); Scenario.GroundTargets_Y.push_back(118.285714);
+    Scenario.GroundTargets_X.push_back(13.122088); Scenario.GroundTargets_Y.push_back(114.857143);
+    Scenario.GroundTargets_X.push_back(13.122088); Scenario.GroundTargets_Y.push_back(118.285714);
+    Scenario.GroundTargets_X.push_back(16.067662); Scenario.GroundTargets_Y.push_back(114.857143);
+    Scenario.GroundTargets_X.push_back(16.067662); Scenario.GroundTargets_Y.push_back(118.285714);
+    Scenario.epoch = "25 Nov 2020 20:00:00.000";
+    Scenario.SensorHalfAngle = 30;
+    Scenario.Timestep = 1;
+    Scenario.Length = 24;
+
+    double a_km = 6986;
+    double ecc = 0;
+    double i_deg = 14.7335;
+    double O_deg = 0;
+    double w_deg = 0;
+    double TA = 186.606;
+
     int SatsPerPlane = 5;
     int Planes = 2;
-    satellite SeedSat = CreateSat ( 14.7335, 0, 6986, 0, 0, 186.606);
-    constellation WalkerConst = CreateConstellation  (SeedSat, SatsPerPlane, Planes);
+    satellite SeedSat = CreateSat ( i_deg, ecc, a_km, O_deg, w_deg, TA);
+    constellation WalkerConst = CreateConstellation  (SeedSat, SatsPerPlane, Planes,true);
+
+    for (int i = 0; i<SatsPerPlane*Planes;i++){
+        //std::cout << "Pos: " << WalkerConst.satellites[i].pos[0] << " " << WalkerConst.satellites[i].pos[1] << " " << WalkerConst.satellites[i].pos[2] << std::endl;
+        //std::cout << "Vel: " << WalkerConst.satellites[i].vel[0] << " " << WalkerConst.satellites[i].vel[1] << " " << WalkerConst.satellites[i].vel[2] << std::endl;
+        //std::cout << "TA: " << WalkerConst.satellites[i].TA_deg;
+        //std::cout << "RAAN: " << WalkerConst.satellites[i].O_deg;
+        //std:: cout << std::endl;
+    }
+
     exit(-1);
 
 
 
    std::cout << "argc = " << argc << std::endl; 
-   for(int i = 0; i < argc; i++) 
-      std::cout << "argv[" << i << "] = " << argv[i] << std::endl;
+   
 
     std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();   
 

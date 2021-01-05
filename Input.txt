@@ -1,0 +1,15 @@
+Seed Sat: 6986, 0 , 14.7335, 0, 0, 186.606
+Constellation: 5,2,0
+Epoch: "25 Nov 2020 20:00:00:000"
+Timestep (sec): 1
+Length (hours): 24
+SensorHalfAngle (deg): 30
+GroundTargets = 13.122088 111.42851
+GroundTargets = 13.122088 111.42851
+GroundTargets =16.067662 111.428571
+GroundTargets = 10.176514 114.857143
+GroundTargets = 10.176514 118.285714
+GroundTargets = 13.122088 114.857143
+GroundTargets = 13.122088 118.285714
+GroundTargets =  16.067662 114.857143
+GroundTargets = 16.067662 118.285714
